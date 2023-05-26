@@ -9,6 +9,7 @@ import { NgModule } from '@angular/core';
 import { RegistrazioneComponent } from './pages/registrazione/registrazione.component';
 import { RouteGuardService } from '../services/route-guard.service';
 import { WelcomeComponent } from './pages/welcome/welcome.component';
+import { GestartComponent } from './pages/gestart/gestart.component';
 
 const routes: Routes = [
   {path:'', component: LoginComponent},
@@ -17,6 +18,7 @@ const routes: Routes = [
   {path:'welcome/:userid', component: WelcomeComponent, canActivate:[RouteGuardService]},
   {path:'articoli', component : ArticoliComponent, canActivate:[RouteGuardService]},
   {path:'articoli/grid', component : GridArticoliComponent, canActivate:[RouteGuardService]},
+  {path: 'gestart/:codart', component:GestartComponent, canActivate:[RouteGuardService]},
   {path:'logout', component : LogoutComponent},
   {path:'**', component: ErrorComponent},
 ];
