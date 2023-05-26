@@ -9,17 +9,17 @@
     </div>
   </div>
 </section>
-
 <ag-grid-angular
-class="ag-theme-alpine"
-[columnDefs]="columnDefs"
-[defaultColDef]="defaultColDef"
-[rowData]="articoli$ | async"
-[rowSelection]="'multiple'"
-[animateRows]="true"
-(gridReady)="onGridReady($event)"
-(cellClicked)="onCellClicked($event)"
-></ag-grid-angular>
+   style="width: auto; height: auto"
+   class="ag-theme-alpine"
+   [columnDefs]="columnDefs"
+   [gridOptions]="gridOptions"
+   [pagination]="true"
+   [paginationPageSize]="paginationPageSize"
+   [defaultColDef]="defaultColDef"
+   [rowData]="articoli$ | async"
+   (gridReady)="onGridReady($event)"
+ ></ag-grid-angular>
 
   <!--
   <div class="card mb-4">
