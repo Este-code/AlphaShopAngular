@@ -58,4 +58,13 @@ export class ArticoliService {
   delArticoloByCodArt = (codart: string) =>
     this.httpClient.delete(`http://${this.server}:${this.port}/api/articoli/elimina/${codart}`);
 
+  getTuttiArticoli = () => {
+      return this.httpClient.get<IArticoli>(`http://${this.server}:${this.port}/api/articoli/tutti`)
+      .pipe(
+        map(response => {
+          response.idStatoArt = this.getDesStatoArt(response.idStatoArt)
+          return response;
+        })
+      );
+    }
 }

@@ -14,6 +14,7 @@ import { NgModule } from '@angular/core';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { RegistrazioneComponent } from './pages/registrazione/registrazione.component';
 import { WelcomeComponent } from './pages/welcome/welcome.component';
+import { AgGridModule } from 'ag-grid-angular';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { WelcomeComponent } from './pages/welcome/welcome.component';
     FormsModule,
     CoreModule,
     HttpClientModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    AgGridModule
   ],
   providers: [],
   bootstrap: [AppComponent]

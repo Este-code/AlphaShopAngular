@@ -1,5 +1,4 @@
 <section class="content-main">
-
   <div class="content-header">
     <h2 class="content-title">Lista Prodotti</h2>
     <div>
@@ -9,8 +8,22 @@
       </button>
     </div>
   </div>
+</section>
+
+<ag-grid-angular
+class="ag-theme-alpine"
+[columnDefs]="columnDefs"
+[defaultColDef]="defaultColDef"
+[rowData]="articoli$ | async"
+[rowSelection]="'multiple'"
+[animateRows]="true"
+(gridReady)="onGridReady($event)"
+(cellClicked)="onCellClicked($event)"
+></ag-grid-angular>
+
+  <!--
   <div class="card mb-4">
-    <!-- Inizio Header -->
+   Inizio Header
     <header class="card-header">
       <div class="row gx-3">
 					<div class="col-lg-4 col-md-6 me-auto">
@@ -40,10 +53,11 @@
 						</select>
 					</div>
 				</div>
-    </header> <!-- Fine Header -->
+    </header>  Fine Header
 
     <div class="card-body">
       <div class="table-responsive">
+
         <table class="table table-hover">
           <thead>
             <tr>
@@ -85,7 +99,7 @@
 										<li><a class="dropdown-item" href="#">Info</a></li>
 										<li><a class="dropdown-item" href="#">Modifica</a></li>
 									</ul>
-								</div> <!-- dropdown //end -->
+								</div>  dropdown //end
 							</td>
 
             </tr>
@@ -101,6 +115,7 @@
           </pagination-controls>
         </nav>
 
+
         <div class="alert alert-danger" role="alert" *ngIf="errore">
           {{errore}}
         </div>
@@ -112,8 +127,6 @@
   </div>
 </section>
 
-
-<!--
 <table id="articoli" border="1">
   <caption>Alimentari</caption>
   <thead>

@@ -1,7 +1,9 @@
 import { ActivatedRoute, ParamMap } from '@angular/router';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { Observable, map, of } from 'rxjs';
-
+import {AgGridAngular } from 'ag-grid-angular';
+import { CellClickedEvent, ColDef, GridReadyEvent } from 'ag-grid-community';
 import { ArticoliService } from 'src/services/data/articoli.service';
 import { IArticoli } from 'src/app/models/Articoli';
 
@@ -10,9 +12,9 @@ import { IArticoli } from 'src/app/models/Articoli';
   templateUrl: './articoli.component.html',
   styleUrls: ['./articoli.component.css']
 })
-export class ArticoliComponent implements OnInit {
+export class ArticoliComponent {
 
-  articoli$: IArticoli[]  = []
+  public articoli$!: Observable<any[]>;
   errore : string = "";
 
   pagina : number = 1;
@@ -23,8 +25,50 @@ export class ArticoliComponent implements OnInit {
 
   filterType: number = 0;
 
-  constructor(private articoliService: ArticoliService, private route: ActivatedRoute) { }
+  public columnDefs: ColDef[] = [
+    {field : 'codArt'},
+    {field : 'descrizione'},
+    {field : 'um'},
+    {field : 'codStat'},
+    {field : 'pzCart'},
+    {field : 'pesoNetto'},
+    {field : 'dataCreazione'}
+  ];
 
+  // DefaultColDef sets props common to all Columns
+  public defaultColDef: ColDef = {
+    sortable: true,
+    filter: true,
+  };
+  // For accessing the Grid's API
+  @ViewChild(AgGridAngular) agGrid!: AgGridAngular;
+
+  constructor(private articoliService: ArticoliService, private route: ActivatedRoute,private http: HttpClient) { }
+ // Example load data from server
+  onGridReady(params: GridReadyEvent) {
+    this.articoli$ =  this.http
+    .get<any[]>('http://localhost:5051/api/articoli/tutti');
+  }
+
+  handleResponse(response : any) {
+      this.articoli$ = response;
+  }
+
+  handleError(error: any) {
+      console.log(error);
+      this.errore = error.error.message;
+  }
+
+  // Example of consuming Grid Event
+  onCellClicked( e: CellClickedEvent): void {
+    console.log('cellClicked', e);
+  }
+
+  // Example using Grid's API
+  clearSelection(): void {
+    this.agGrid.api.deselectAll();
+  }
+/*
   ngOnInit(): void {
 
     this.filter$ = this.route.queryParamMap.pipe(
@@ -44,6 +88,7 @@ export class ArticoliComponent implements OnInit {
       this.getArticoli(this.filter);
     }
   }
+
 
   getArticoli = (filter : string) => {
 
@@ -115,5 +160,5 @@ export class ArticoliComponent implements OnInit {
       }
     )
   }
-
+*/
 }
