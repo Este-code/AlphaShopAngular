@@ -27,18 +27,19 @@ export class ArticoliComponent{
   filterType: number = 0;
 */
   public columnDefs: ColDef[] = [
-    {field : 'codArt'},
-    {field : 'descrizione'},
+    {field : 'codArt' },
+    {field : 'descrizione' },
     {field : 'um'},
     {field : 'codStat'},
     {field : 'pzCart'},
     {field : 'pesoNetto'},
-    {field : 'dataCreazione'}
+    {field : 'dataCreazione', filter: 'agDateColumnFilter',}
   ];
  // DefaultColDef sets props common to all Columns
   public defaultColDef: ColDef = {
     sortable: true,
     filter: true,
+    flex: 1,
     resizable: true,
   };
 
@@ -62,7 +63,6 @@ export class ArticoliComponent{
     this.articoli$ = this.http
     .get<ArticoliGrid[]>('http://localhost:5051/api/articoli/tutti');
   }
-
 
 
 /*
