@@ -16,7 +16,7 @@ import { ArticoliGrid } from 'src/app/models/interface';
 })
 export class ArticoliComponent{
 
-/*
+
   errore : string = "";
   pagina : number = 1;
   righe : number = 10;
@@ -25,47 +25,11 @@ export class ArticoliComponent{
   filter: string | null = "";
 
   filterType: number = 0;
-*/
-  public columnDefs: ColDef[] = [
-    {field : 'codArt' },
-    {field : 'descrizione' },
-    {field : 'um'},
-    {field : 'codStat'},
-    {field : 'pzCart'},
-    {field : 'pesoNetto'},
-    {field : 'dataCreazione', filter: 'agDateColumnFilter',}
-  ];
- // DefaultColDef sets props common to all Columns
-  public defaultColDef: ColDef = {
-    sortable: true,
-    filter: true,
-    flex: 1,
-    resizable: true,
-  };
-
-  public gridOptions: GridOptions<any[]> = {
-    colResizeDefault: 'shift'
-  }
-
-  public paginationPageSize = 10;
-  public articoli$!: Observable<any[]>;
-  // For accessing the Grid's API
-  @ViewChild(AgGridAngular) agGrid!: AgGridAngular;
-
-  //constructor(private articoliService: ArticoliService, private route: ActivatedRoute,private http: HttpClient) { }
-  constructor(private http: HttpClient) { }
-
-  // Example load data from server
-  onGridReady(params: GridReadyEvent) {
-    params.api.sizeColumnsToFit()
-    params.api.setDomLayout('autoHeight')
-
-    this.articoli$ = this.http
-    .get<ArticoliGrid[]>('http://localhost:5051/api/articoli/tutti');
-  }
+  articoli$: IArticoli[]  = []
 
 
-/*
+  constructor(private articoliService: ArticoliService, private route: ActivatedRoute,private http: HttpClient) { }
+
   ngOnInit(): void {
 
     this.filter$ = this.route.queryParamMap.pipe(
@@ -157,6 +121,6 @@ export class ArticoliComponent{
       }
     )
   }
-*/
+
 }
 

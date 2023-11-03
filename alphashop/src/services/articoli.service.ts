@@ -9,7 +9,7 @@ import { map } from 'rxjs';
 export class ArticoliService {
 
   server : string = "localhost";
-  port : string = "5051";
+  port : string = "5050";
 
   constructor(private httpClient : HttpClient) { }
 
